@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Cash Mashine</title>
+    <script type="text/javascript">
+        function validateCardNumber(inputTxt) {
+            var cardno = /^([0-9]{16})$/;
+            if (inputTxt.value.match(cardno)) {
+                return true;
+            }
+            else {
+                alert("Not a valid creadit card");
+                event.preventDefault();
+                return false;
+            }
+        }
+    </script>
+</head>
+<body>
+<form name="cc" action="" method="get" onsubmit="validateCardNumber(forms.cc.cardNumber)">
+
+    <label>Please enter you card number</label>
+    <input type="text" size="24" maxlength="20" name="cardNumber" readonly/>
+
+    <div id="virtualKeyboard">
+        <input type="button" value="1" id="n1">
+        <input type="button" value="2" id="n2">
+        <input type="button" value="3" id="n3">
+        <input type="button" value="4" id="n4">
+        <input type="button" value="5" id="n5">
+        <input type="button" value="6" id="n6">
+        <input type="button" value="7" id="n7">
+        <input type="button" value="8" id="n8">
+        <input type="button" value="9" id="n9">
+    </div>
+    <input type="reset" value="Clean"/>
+    <input type="submit" value="OK"/>
+</form>
+</body>
+</html>
