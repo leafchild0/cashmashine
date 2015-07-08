@@ -3,13 +3,23 @@
 <head>
     <meta charset="UTF-8">
     <title>Cash Machine</title>
+    <script type="text/javascript" src="http://code.jquery.com/jquery-2.1.4.min.js"></script>
     <script type="text/javascript">
+
         function keyboardAction(e) {
+
+            var $card = $('#cardNumber');
             if (e.target.tagName == "INPUT") {
                 var button = e.target;
-                var ccField = document.getElementById("cardNumber");
-                ccField.value += button.id;
+                $card.value += button.id;
             }
+            //Delimiters
+             var foo = $card.val().split("-").join("");
+             if (foo.length > 0) {
+             foo = foo.match(new RegExp('.{1,4}', 'g')).join("-");
+             }
+             $card.val(foo);
+
         }
 
         function validateCardNumber(inputTxt) {
@@ -33,8 +43,8 @@
         <input id="cardNumber" type="text" size="24" maxlength="20" name="cardNumber" readonly/>
     </div>
 
-    <div id="virtualKeyboard" onclick="keyboardAction(event)">
-        <table id="tableKeyboard" align="center">
+    <div id="virtualKeyboard" align="center" onclick="keyboardAction(event)">
+        <table id="tableKeyboard" >
             <tr>
                 <td><input type="button" value="1" id="1"></td>
                 <td><input type="button" value="2" id="2"></td>
