@@ -27,8 +27,7 @@ import java.util.Properties;
 public class DBConfig {
 
     // Private fields
-
-    @Autowired
+        @Autowired
     private Environment env;
 
     //@Autowired
@@ -55,11 +54,8 @@ public class DBConfig {
 
     @Bean
     public LocalSessionFactoryBean sessionFactory() {
-
         LocalSessionFactoryBean sessionBuilder = new LocalSessionFactoryBean();
-
         sessionBuilder.setDataSource(dataSource());
-
         sessionBuilder.setPackagesToScan(env.getProperty("entitymanager.packagesToScan"));
 
         // Hibernate properties
@@ -78,7 +74,6 @@ public class DBConfig {
             env.getProperty("hibernate.hbm2ddl.auto"));
 
         sessionBuilder.setHibernateProperties(additionalProperties);
-
         return sessionBuilder;
     }
 }

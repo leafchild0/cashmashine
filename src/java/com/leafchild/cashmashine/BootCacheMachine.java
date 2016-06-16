@@ -16,7 +16,7 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 @ComponentScan
 @EnableJpaRepositories
 @EnableAutoConfiguration
-public class BootCachMachine {
+public class BootCacheMachine {
 
     public static void main(String[] args) {
 
@@ -24,6 +24,6 @@ public class BootCachMachine {
 
         //session.beginTransaction();
         //session.close();
-        SpringApplication.run(BootCachMachine.class, args);
+        SpringApplication.run( BootCacheMachine.class, args);
     }
 }

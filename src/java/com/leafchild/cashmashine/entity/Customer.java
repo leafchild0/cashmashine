@@ -9,15 +9,16 @@ package com.leafchild.cashmashine.entity;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import java.io.Serializable;
 import java.util.List;
 
 @Entity
 @Table(name = "CUSTOMER")
-public class Customer {
+public class Customer implements Serializable {
 
         @Id
         @GeneratedValue
-        private Long customer_id;
+        private Integer customer_id;
         @NotNull
         private String customerName;
         @OneToMany
@@ -31,7 +32,7 @@ public class Customer {
                 this.customerName = customerName;
         }
 
-        public Long getCustomer_id() {
+        public Integer getCustomer_id() {
                 return customer_id;
         }
 

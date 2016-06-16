@@ -13,30 +13,38 @@ import java.math.BigDecimal;
 import java.util.Date;
 
 @Entity
-@Table(name = "CUSTOMER_TRANSACTIONS")
+@Table( name = "CUSTOMER_TRANSACTIONS" )
 public class CardTransaction {
 
-        @Id
-        @GeneratedValue
-        private Long cardTransaction_id;
-        @NotNull
-        private String cardTransactionCode;
-        @Temporal(TemporalType.TIMESTAMP)
-        private Date cardTransactionDate;
-        private BigDecimal amount;
+    @Id
+    @GeneratedValue
+    private Integer cardTransaction_id;
+    @NotNull
+    private String cardTransactionCode;
+    @Temporal( TemporalType.TIMESTAMP )
+    private Date cardTransactionDate;
+    private BigDecimal amount;
 
-        public CardTransaction() {
-        }
+    public CardTransaction(){}
 
-        public CardTransaction(String cardTransactionCode, Date cardTransactionDate, BigDecimal amount) {
-                this.cardTransactionCode = cardTransactionCode;
-                this.cardTransactionDate = cardTransactionDate;
-                this.amount = amount;
-        }
+    public CardTransaction( String cardTransactionCode, Date cardTransactionDate, BigDecimal amount ){
+        this.cardTransactionCode = cardTransactionCode;
+        this.cardTransactionDate = cardTransactionDate;
+        this.amount = amount;
+    }
 
-        @Override
-        public String toString() {
-                return "CardTransaction" + "{cardTransaction_id = " + cardTransaction_id + ", cardTransactionCode = '"
-                               + cardTransactionCode + ", cardTransactionDate = '" + cardTransactionDate + ", amount = '" + amount + '}';
-        }
+    public Integer getCardTransaction_id(){
+
+        return cardTransaction_id;
+    }
+
+    public void setCardTransaction_id( Integer cardTransaction_id ){
+        this.cardTransaction_id = cardTransaction_id;
+    }
+
+    @Override
+    public String toString(){
+        return "CardTransaction" + "{cardTransaction_id = " + cardTransaction_id + ", cardTransactionCode = '"
+                   + cardTransactionCode + ", cardTransactionDate = '" + cardTransactionDate + ", amount = '" + amount + '}';
+    }
 }
