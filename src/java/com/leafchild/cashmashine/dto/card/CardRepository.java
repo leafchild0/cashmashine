@@ -9,5 +9,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
  * Date: 16/06/16
  */
 
-interface CardRepository extends JpaRepository<Card, Integer> {
+interface CardRepository extends JpaRepository<Card, Long> {
 }

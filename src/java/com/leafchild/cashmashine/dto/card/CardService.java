@@ -12,7 +12,7 @@ import java.util.List;
 
 interface CardService {
     
-    Card findCardByID( int id);
+    Card findCardByID( long id);
     
     Card saveCard( Card card);
     

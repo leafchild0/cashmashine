@@ -13,47 +13,61 @@ import java.io.Serializable;
 import java.util.List;
 
 @Entity
-@Table(name = "CUSTOMER")
+@Table( name = "CUSTOMER" )
 public class Customer implements Serializable {
 
-        @Id
-        @GeneratedValue
-        private Integer customer_id;
-        @NotNull
-        private String customerName;
-        @OneToMany
-        @JoinTable(name = "customer_cards", joinColumns = @JoinColumn(name = "customer_id"), inverseJoinColumns = @JoinColumn(name = "card_id"))
-        private List<Card> cards;
+    @Id
+    @GeneratedValue
+    private Integer customer_id;
+    @NotNull
+    private String customerName;
+    @OneToMany
+    @JoinTable( name = "CUSTOMER_CARDS", joinColumns = @JoinColumn( name = "customer_id" ),
+        inverseJoinColumns = @JoinColumn( name = "card_id" ) )
+    private List<Card> cards;
 
-        public Customer() {
-        }
+    public Customer(){
 
-        public Customer(String customerName) {
-                this.customerName = customerName;
-        }
+    }
 
-        public Integer getCustomer_id() {
-                return customer_id;
-        }
+    public Customer(String customerName){
 
-        public String getCustomerName() {
-                return customerName;
-        }
+        this.customerName = customerName;
+    }
 
-        public void setCustomerName(String customer_name) {
-                this.customerName = customer_name;
-        }
+    public Integer getCustomer_id(){
 
-        public List<Card> getCards() {
-                return cards;
-        }
+        return customer_id;
+    }
 
-        public void setCards(List<Card> cards) {
-                this.cards = cards;
-        }
+    public void setCustomer_id(Integer customer_id){
 
-        @Override
-        public String toString() {
-                return "Customer" + "{id = " + customer_id + ", customer_name = '" + customerName + '}';
-        }
+        this.customer_id = customer_id;
+    }
+
+    public String getCustomerName(){
+
+        return customerName;
+    }
+
+    public void setCustomerName(String customer_name){
+
+        this.customerName = customer_name;
+    }
+
+    public List<Card> getCards(){
+
+        return cards;
+    }
+
+    public void setCards(List<Card> cards){
+
+        this.cards = cards;
+    }
+
+    @Override
+    public String toString(){
+
+        return "Customer" + "{id = " + customer_id + ", customer_name = '" + customerName + '}';
+    }
 }

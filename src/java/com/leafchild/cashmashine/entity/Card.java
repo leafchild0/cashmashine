@@ -8,23 +8,24 @@ package com.leafchild.cashmashine.entity;
  */
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.List;
 
 @Entity
 @Table( name = "CUSTOMER_CARDS" )
-public class Card {
+public class Card implements Serializable{
 
     @Id
     @GeneratedValue
-    private Integer card_id;
+    private Long card_id;
     private BigDecimal currentBalance;
     private short pin;
     private boolean isLocked;
 
     @OneToMany
     @JoinTable( name = "cards_transactions", joinColumns = @JoinColumn( name = "card_id" ),
-        inverseJoinColumns = @JoinColumn( name = "transaction_id" ) )
+        inverseJoinColumns = @JoinColumn( name = "cardTransaction_id" ) )
     private List<CardTransaction> trasactions;
 
     public Card(){}
@@ -66,11 +67,11 @@ public class Card {
         this.trasactions = trasactions;
     }
 
-    public Integer getCard_id(){
+    public Long getCard_id(){
         return card_id;
     }
 
-    public void setCard_id( Integer card_id ){
+    public void setCard_id( Long card_id ){
         this.card_id = card_id;
     }
 

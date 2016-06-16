@@ -18,7 +18,7 @@ public class CardDTO implements CardService {
     private CardRepository cardRepository;
 
     @Override
-    public Card findCardByID( int id ){
+    public Card findCardByID( long id ){
         return cardRepository.findOne( id );
     }
 

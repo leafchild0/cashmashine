@@ -27,7 +27,7 @@ import java.util.Properties;
 public class DBConfig {
 
     // Private fields
-        @Autowired
+    @Autowired
     private Environment env;
 
     //@Autowired
@@ -47,12 +47,13 @@ public class DBConfig {
         dataSource.setPassword(env.getProperty("db.password"));
         //return dataSource;
         EmbeddedDatabaseBuilder builder = new EmbeddedDatabaseBuilder();
-        EmbeddedDatabase        db      = builder.setType( EmbeddedDatabaseType.H2).addScript("schema.sql").addScript("insert.sql").build();
+        EmbeddedDatabase db = builder.setType( EmbeddedDatabaseType.H2).
+           addScript("schema.sql").addScript("insert.sql").build();
         return db;
     }
 
 
-    @Bean
+    /*@Bean
     public LocalSessionFactoryBean sessionFactory() {
         LocalSessionFactoryBean sessionBuilder = new LocalSessionFactoryBean();
         sessionBuilder.setDataSource(dataSource());
@@ -75,5 +76,5 @@ public class DBConfig {
 
         sessionBuilder.setHibernateProperties(additionalProperties);
         return sessionBuilder;
-    }
+    }*/
 }

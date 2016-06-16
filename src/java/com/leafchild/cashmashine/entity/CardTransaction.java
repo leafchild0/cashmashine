@@ -9,12 +9,13 @@ package com.leafchild.cashmashine.entity;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
 
 @Entity
 @Table( name = "CUSTOMER_TRANSACTIONS" )
-public class CardTransaction {
+public class CardTransaction implements Serializable {
 
     @Id
     @GeneratedValue
