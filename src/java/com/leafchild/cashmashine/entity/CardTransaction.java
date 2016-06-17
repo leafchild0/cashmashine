@@ -15,11 +15,11 @@ import java.util.Date;
 import java.util.List;
 
 @Entity
-@Table( name = "CUSTOMER_TRANSACTIONS" )
+@Table( name = "CARD_TRANSACTIONS" )
 public class CardTransaction implements Serializable {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue( strategy = GenerationType.TABLE )
     private Long cardTransaction_id;
     @NotNull
     private String cardTransactionCode;
@@ -28,7 +28,7 @@ public class CardTransaction implements Serializable {
     private BigDecimal amount;
 
     @ManyToOne
-    @JoinTable( name = "CUSTOMER_CARDS", joinColumns = @JoinColumn( name = "cardTransaction_id" ), inverseJoinColumns = @JoinColumn( name = "card_id" ) )
+    @JoinColumn(name = "card_id")
     private Card card;
 
     public CardTransaction(){}
@@ -59,8 +59,38 @@ public class CardTransaction implements Serializable {
         return card;
     }
 
-    public void setCard( Card card ){
+    public void setCard(Card card){
 
         this.card = card;
+    }
+
+    public String getCardTransactionCode(){
+
+        return cardTransactionCode;
+    }
+
+    public void setCardTransactionCode(String cardTransactionCode){
+
+        this.cardTransactionCode = cardTransactionCode;
+    }
+
+    public Date getCardTransactionDate(){
+
+        return cardTransactionDate;
+    }
+
+    public void setCardTransactionDate(Date cardTransactionDate){
+
+        this.cardTransactionDate = cardTransactionDate;
+    }
+
+    public BigDecimal getAmount(){
+
+        return amount;
+    }
+
+    public void setAmount(BigDecimal amount){
+
+        this.amount = amount;
     }
 }

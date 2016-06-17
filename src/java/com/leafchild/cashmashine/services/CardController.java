@@ -23,13 +23,13 @@ import java.util.List;
 public class CardController {
 
     @Autowired
-    CardService cardService;
+    private CardService cardService;
 
     private static final Logger logger =
         LoggerFactory.getLogger( CardController.class );
 
     @RequestMapping( value = "/", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE )
-    public ResponseEntity<List<Card>> showUsers(){
+    public ResponseEntity<List<Card>> findCards(){
         List<Card> cards = cardService.getAllCards();
         if( cards.isEmpty() ) return new ResponseEntity<>( HttpStatus.NO_CONTENT );
 
@@ -51,7 +51,7 @@ public class CardController {
     }
 
     @RequestMapping( value = "/", method = RequestMethod.POST )
-    public ResponseEntity<Card> createUser( @RequestBody Card card ){
+    public ResponseEntity<Card> addCard( @RequestBody Card card ){
         //Check required params
         //Create card
         cardService.saveCard( card );
@@ -61,7 +61,7 @@ public class CardController {
     }
 
     @RequestMapping( value = "/{id}", method = RequestMethod.PUT )
-    public ResponseEntity<Card> updateUser( @PathVariable( "id" ) long id, @RequestBody Card card ){
+    public ResponseEntity<Card> updateCard( @PathVariable( "id" ) long id, @RequestBody Card card ){
 
         Card foundCard = cardService.findCardByID( id );
 
@@ -80,7 +80,7 @@ public class CardController {
     }
 
     @RequestMapping( value = "/{id}", method = RequestMethod.DELETE )
-    public ResponseEntity<Void> deleteUser( @PathVariable( "id" ) long id ){
+    public ResponseEntity<Void> deleteCard( @PathVariable( "id" ) long id ){
 
         Card foundCard = cardService.findCardByID( id );
 
@@ -88,7 +88,6 @@ public class CardController {
             logger.error( "Requested card " + id + " not found" );
             return new ResponseEntity<>( HttpStatus.NOT_FOUND );
         }
-
         //Delete card
         cardService.deleteCard( foundCard );
         //Check on errors

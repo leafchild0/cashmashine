@@ -43,7 +43,7 @@ public class CardTransactionDTO implements CardTransactionService {
     }
 
     @Override
-    public List getAllTransactions(){
+    public List<CardTransaction> getAllTransactions(){
         return transactionRepository.findAll();
     }
 

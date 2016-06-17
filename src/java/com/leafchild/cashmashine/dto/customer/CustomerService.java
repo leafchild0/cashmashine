@@ -10,17 +10,17 @@ import java.util.List;
  * Date: 16/06/16
  */
 
-interface CustomerService {
+public interface CustomerService {
     
-    Customer findCurtomerByID( long id);
+    Customer findCustomerByID(long id);
     
-    Customer saveCurtomer( Customer user);
+    Customer saveCustomer(Customer user);
     
-    Customer updateCurtomer( Customer user);
+    Customer updateCustomer(Customer user);
 
-    Customer deleteCurtomer( Customer user);
+    Customer deleteCustomer(Customer user);
     
-    List getAllCurtomers();
+    List<Customer> getAllCurtomers();
     
     long count();
 }

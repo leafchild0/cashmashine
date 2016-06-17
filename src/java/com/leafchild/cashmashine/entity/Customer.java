@@ -11,20 +11,17 @@ import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table( name = "CUSTOMER" )
 public class Customer implements Serializable {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue( strategy = GenerationType.TABLE )
     private Long customer_id;
     @NotNull
     private String customerName;
-    @OneToMany
-    @JoinTable( name = "CUSTOMER_CARDS", joinColumns = @JoinColumn( name = "customer_id" ),
-        inverseJoinColumns = @JoinColumn( name = "card_id" ) )
-    private List<Card> cards;
 
     public Customer(){
 
@@ -55,19 +52,10 @@ public class Customer implements Serializable {
         this.customerName = customer_name;
     }
 
-    public List<Card> getCards(){
-
-        return cards;
-    }
-
-    public void setCards(List<Card> cards){
-
-        this.cards = cards;
-    }
-
     @Override
     public String toString(){
 
         return "Customer" + "{id = " + customer_id + ", customer_name = '" + customerName + '}';
     }
+
 }

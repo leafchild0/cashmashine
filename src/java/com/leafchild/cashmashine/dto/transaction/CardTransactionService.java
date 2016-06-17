@@ -18,7 +18,7 @@ public interface CardTransactionService {
 
     CardTransaction deleteTransaction( CardTransaction transaction );
     
-    List getAllTransactions();
+    List<CardTransaction> getAllTransactions();
     
     long count();
 }

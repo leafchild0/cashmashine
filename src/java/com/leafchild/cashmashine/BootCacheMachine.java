@@ -6,6 +6,9 @@ package com.leafchild.cashmashine;
  * Date: 14/06/16
  */
 
+import com.leafchild.cashmashine.dto.transaction.CardTransactionDTO;
+import com.leafchild.cashmashine.dto.transaction.CardTransactionService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -18,12 +21,9 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 @EnableAutoConfiguration
 public class BootCacheMachine {
 
+
     public static void main(String[] args) {
 
-        //Session session = HibernateUtil.getSessionFactory().openSession();
-
-        //session.beginTransaction();
-        //session.close();
         SpringApplication.run( BootCacheMachine.class, args);
     }
 }

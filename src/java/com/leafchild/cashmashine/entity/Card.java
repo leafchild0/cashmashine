@@ -9,21 +9,32 @@ package com.leafchild.cashmashine.entity;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table( name = "CUSTOMER_CARDS" )
-public class Card implements Serializable{
+public class Card implements Serializable {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue( strategy = GenerationType.TABLE )
     private Long card_id;
     private BigDecimal currentBalance;
     private short pin;
     private boolean isLocked;
+
+    @ManyToOne
+    @JoinColumn(name = "customer_id")
+    private Customer customer;
 
     public Card(){}
 
@@ -71,5 +82,16 @@ public class Card implements Serializable{
     @Override
     public String toString(){
         return "Card" + "{id=" + card_id + ", pin='" + pin + ", isLocked='" + isLocked + '}';
+    }
+
+
+    public Customer getCustomer(){
+
+        return customer;
+    }
+
+    public void setCustomer(Customer customer){
+
+        this.customer = customer;
     }
 }

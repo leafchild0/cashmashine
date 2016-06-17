@@ -26,29 +26,29 @@ public class CustomerDTO implements CustomerService {
 
 
     @Override
-    public Customer findCurtomerByID( long id ){
+    public Customer findCustomerByID(long id ){
         return customerRepository.findOne( id );
     }
 
     @Override
-    public Customer saveCurtomer( Customer user ){
+    public Customer saveCustomer(Customer user ){
         return customerRepository.save(user);
     }
 
     @Override
-    public Customer updateCurtomer( Customer user ){
+    public Customer updateCustomer(Customer user ){
         Customer updatedCust = customerRepository.findOne(user.getCustomer_id());
 
         if (updatedCust == null)
             throw new NotFoundException();
 
         updatedCust.setCustomerName(user.getCustomerName());
-        updatedCust.setCards(user.getCards());
+        //updatedCust.setCards(user.getCards());
         return updatedCust;
     }
 
     @Override
-    public Customer deleteCurtomer( Customer user ){
+    public Customer deleteCustomer(Customer user ){
         Customer cust = customerRepository.findOne( user.getCustomer_id() );
         if(cust != null) {
             customerRepository.delete(user);
@@ -59,7 +59,7 @@ public class CustomerDTO implements CustomerService {
     }
 
     @Override
-    public List getAllCurtomers(){
+    public List<Customer> getAllCurtomers(){
         return customerRepository.findAll();
     }
 
