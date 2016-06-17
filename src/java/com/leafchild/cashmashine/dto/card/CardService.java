@@ -10,17 +10,17 @@ import java.util.List;
  * Date: 16/06/16
  */
 
-interface CardService {
+public interface CardService {
     
     Card findCardByID( long id);
     
     Card saveCard( Card card);
-    
+
     Card updateCard( Card card);
     
     Card deleteCard( Card card);
     
-    List getAllCards();
+    List<Card> getAllCards();
     
     long count();
 }

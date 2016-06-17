@@ -12,6 +12,7 @@ import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @Table( name = "CUSTOMER_TRANSACTIONS" )
@@ -19,12 +20,16 @@ public class CardTransaction implements Serializable {
 
     @Id
     @GeneratedValue
-    private Integer cardTransaction_id;
+    private Long cardTransaction_id;
     @NotNull
     private String cardTransactionCode;
     @Temporal( TemporalType.TIMESTAMP )
     private Date cardTransactionDate;
     private BigDecimal amount;
+
+    @ManyToOne
+    @JoinTable( name = "CUSTOMER_CARDS", joinColumns = @JoinColumn( name = "cardTransaction_id" ), inverseJoinColumns = @JoinColumn( name = "card_id" ) )
+    private Card card;
 
     public CardTransaction(){}
 
@@ -34,12 +39,12 @@ public class CardTransaction implements Serializable {
         this.amount = amount;
     }
 
-    public Integer getCardTransaction_id(){
+    public Long getCardTransaction_id(){
 
         return cardTransaction_id;
     }
 
-    public void setCardTransaction_id( Integer cardTransaction_id ){
+    public void setCardTransaction_id( Long cardTransaction_id ){
         this.cardTransaction_id = cardTransaction_id;
     }
 
@@ -47,5 +52,15 @@ public class CardTransaction implements Serializable {
     public String toString(){
         return "CardTransaction" + "{cardTransaction_id = " + cardTransaction_id + ", cardTransactionCode = '"
                    + cardTransactionCode + ", cardTransactionDate = '" + cardTransactionDate + ", amount = '" + amount + '}';
+    }
+
+    public Card getCard(){
+
+        return card;
+    }
+
+    public void setCard( Card card ){
+
+        this.card = card;
     }
 }

@@ -1,5 +1,5 @@
-INSERT INTO users(id, name, phone) VALUES (1, 'Tom', '555055-55');
-INSERT INTO users(id, name, phone) VALUES (2, 'john', '9876986');
-INSERT INTO users(id, name, phone) VALUES (3, 'Vic', '987-55');
-INSERT INTO users(id, name, phone) VALUES (4, 'Indi', '89789-55');
-INSERT INTO users(id, name, phone) VALUES (5, 'Jack', '7897-55');
+INSERT INTO CUSTOMER_CARDS(card_id, currentBalance, pin, isLocked) VALUES (1, 100, 1111, false);
+INSERT INTO CUSTOMER_TRANSACTIONS(cardTransaction_id, cardTransactionCode, cardTransactionDate, amount, card_id) VALUES (1, '0', '2016-06-17', 0, 1);
+INSERT INTO CUSTOMER_TRANSACTIONS(cardTransaction_id, cardTransactionCode, cardTransactionDate, amount, card_id) VALUES (2, '1', '2016-06-16', 10, 1);
+INSERT INTO CUSTOMER_TRANSACTIONS(cardTransaction_id, cardTransactionCode, cardTransactionDate, amount, card_id) VALUES (3, '1', '2016-06-15', 10, 1);
+INSERT INTO CUSTOMER(customer_id, customerName, card_id) VALUES (1, 'User1', 1);

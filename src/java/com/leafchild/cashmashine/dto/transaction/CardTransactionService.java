@@ -10,9 +10,9 @@ import java.util.List;
  * Date: 16/06/16
  */
 
-interface CardTransactionService {
+public interface CardTransactionService {
     
-    CardTransaction findTransactionByID( int id );
+    CardTransaction findTransactionByID( long id );
     
     CardTransaction saveTransaction( CardTransaction transaction );
 

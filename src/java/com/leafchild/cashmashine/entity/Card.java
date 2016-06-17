@@ -7,10 +7,12 @@ package com.leafchild.cashmashine.entity;
  * Time: 12:51 AM
  */
 
-import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.Table;
 import java.io.Serializable;
 import java.math.BigDecimal;
-import java.util.List;
 
 @Entity
 @Table( name = "CUSTOMER_CARDS" )
@@ -22,11 +24,6 @@ public class Card implements Serializable{
     private BigDecimal currentBalance;
     private short pin;
     private boolean isLocked;
-
-    @OneToMany
-    @JoinTable( name = "cards_transactions", joinColumns = @JoinColumn( name = "card_id" ),
-        inverseJoinColumns = @JoinColumn( name = "cardTransaction_id" ) )
-    private List<CardTransaction> trasactions;
 
     public Card(){}
 
@@ -57,14 +54,6 @@ public class Card implements Serializable{
 
     public void setIsLocked( boolean isLocked ){
         this.isLocked = isLocked;
-    }
-
-    public List<CardTransaction> getTrasactions(){
-        return trasactions;
-    }
-
-    public void setTrasactions( List<CardTransaction> trasactions ){
-        this.trasactions = trasactions;
     }
 
     public Long getCard_id(){

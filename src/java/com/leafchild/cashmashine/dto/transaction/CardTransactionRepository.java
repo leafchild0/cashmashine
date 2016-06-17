@@ -10,5 +10,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
  * Date: 16/06/16
  */
 
-interface CardTransactionRepository extends JpaRepository<CardTransaction, Integer> {
+interface CardTransactionRepository extends JpaRepository<CardTransaction, Long> {
 }

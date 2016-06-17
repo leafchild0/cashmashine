@@ -7,16 +7,18 @@ package com.leafchild.cashmashine.dto.customer;
  */
 
 import com.leafchild.cashmashine.entity.Customer;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Repository;
 
 import javax.annotation.Resource;
+import javax.transaction.Transactional;
 import javax.ws.rs.NotFoundException;
 import java.util.List;
 
 /**
  * DAO class for {@link Customer}
  */
-@Component
+@Repository
+@Transactional
 public class CustomerDTO implements CustomerService {
 
     @Resource
@@ -24,7 +26,7 @@ public class CustomerDTO implements CustomerService {
 
 
     @Override
-    public Customer findCurtomerByID( int id ){
+    public Customer findCurtomerByID( long id ){
         return customerRepository.findOne( id );
     }
 

@@ -1,8 +1,10 @@
 package com.leafchild.cashmashine.dto.transaction;
 
 import com.leafchild.cashmashine.entity.CardTransaction;
+import org.springframework.stereotype.Repository;
 
 import javax.annotation.Resource;
+import javax.transaction.Transactional;
 import javax.ws.rs.NotFoundException;
 import java.util.List;
 
@@ -11,14 +13,15 @@ import java.util.List;
  * Project: cashmashine
  * Date: 14/06/16
  */
-
+@Repository
+@Transactional
 public class CardTransactionDTO implements CardTransactionService {
 
     @Resource
     private CardTransactionRepository transactionRepository;
 
     @Override
-    public CardTransaction findTransactionByID( int id ){
+    public CardTransaction findTransactionByID( long id ){
         return transactionRepository.findOne( id );
     }
 

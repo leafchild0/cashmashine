@@ -12,7 +12,7 @@ import java.util.List;
 
 interface CustomerService {
     
-    Customer findCurtomerByID( int id);
+    Customer findCurtomerByID( long id);
     
     Customer saveCurtomer( Customer user);
     

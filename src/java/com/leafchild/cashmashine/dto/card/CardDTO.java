@@ -1,8 +1,10 @@
 package com.leafchild.cashmashine.dto.card;
 
 import com.leafchild.cashmashine.entity.Card;
+import org.springframework.stereotype.Repository;
 
 import javax.annotation.Resource;
+import javax.transaction.Transactional;
 import javax.ws.rs.NotFoundException;
 import java.util.List;
 
@@ -12,6 +14,8 @@ import java.util.List;
  * Date: 14/06/16
  */
 
+@Repository
+@Transactional
 public class CardDTO implements CardService {
 
     @Resource
@@ -19,45 +23,39 @@ public class CardDTO implements CardService {
 
     @Override
     public Card findCardByID( long id ){
+
         return cardRepository.findOne( id );
     }
 
     @Override
     public Card saveCard( Card card ){
-        return cardRepository.save(card);
+
+        return cardRepository.save( card );
     }
 
     @Override
     public Card updateCard( Card card ){
-        Card updCard = cardRepository.findOne(card.getCard_id());
 
-        if (updCard == null)
-            throw new NotFoundException();
-
-        updCard.setCurrentBalance(card.getCurrentBalance());
-        updCard.setLocked(card.isLocked());
-        updCard.setTrasactions(card.getTrasactions());
-        return updCard;
+        cardRepository.save( card );
+        return card;
     }
 
     @Override
     public Card deleteCard( Card card ){
-        Card found = cardRepository.findOne( card.getCard_id() );
-        if(found != null) {
-            cardRepository.delete(found);
-            return found;
-        } else {
-            throw new NotFoundException();
-        }
+
+        cardRepository.delete( card );
+        return card;
     }
 
     @Override
-    public List getAllCards(){
+    public List<Card> getAllCards(){
+
         return cardRepository.findAll();
     }
 
     @Override
     public long count(){
+
         return cardRepository.count();
     }
 }
