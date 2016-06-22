@@ -1,23 +1,32 @@
-<div class="container">
+<div class="container android">
 
-    <form class="form-horizontal" role="form" method="POST" onsubmit="main.checkCard()" accept-charset="UTF-8">
+    <h2 class="page-header center text-center">Cash Machine Creadit Card</h2>
 
-        <!--<div class="form-group">
-            <div class="col-sm-6 col-lg-6 pull-left">
-                <input type="text" class="form-control required" name="last_name" value=""
-                       placeholder="Last name">
+    <form class="form-horizontal" name="cardForm" role="form" method="POST" ng-submit="card.checkCard()"
+          accept-charset="UTF-8">
+        <div class="row">
+            <div class="form-group">
+                <div class="col-sm-6 col-lg-6 center text-center">
+                    <input type="text" class="keypad-display" name="cardNumber" ng-model="card.cardNumber"
+                           cc-number ng-required="true" disabled/>
+                    <p ng-show="cardForm.cardNumber.$invalid && !cardForm.cardNumber.$pristine">
+                        That's not a valid card number</p>
+
+                </div>
             </div>
-        </div>-->
-        <!--To be done on this page:
-                box for card number
-                small num keyboard with numbers
-                dividing all 16 numbers into group by 4 digits
-        -->
+            <div class="col-md-6">
+                    <ng-keypad on-key-pressed='card.onKeyPressed'>
+                        <ng-key ng-repeat='key in card.keys' ng-key-data='key'>{{key}}</ng-key>
+                        <ng-key></ng-key>
+                        <ng-key ng-key-data='0'>0</ng-key>
+                        <ng-key ng-key-data='"<"'>clean</ng-key>
+                    </ng-keypad>
+            </div>
+        </div>
 
         <div class="row">
-            <div class="col-lg-12">
-                <button type="submit" class="btn btn-success btn-block">OK</button>
-                <button type="button" class="btn btn-success btn-block">Clean</button>
+            <div class="col-lg-12 center text-center">
+                <button type="submit" class="btn btn-success">Find</button>
             </div>
         </div>
 

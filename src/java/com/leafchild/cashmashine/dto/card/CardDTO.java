@@ -33,13 +33,7 @@ public class CardDTO implements CardService {
     }
 
     @Override
-    public boolean checkCard(String cardNumber) {
-        //TODO: will it work?
-        return cardRepository.findByCardName(cardNumber) != null;
-    }
-
-    public void setCardRepository(CardRepository cardRepository) {
-
-        this.cardRepository = cardRepository;
+    public Card checkCard(String cardNumber) {
+        return cardRepository.findByName(cardNumber);
     }
 }

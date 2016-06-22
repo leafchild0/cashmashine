@@ -2,6 +2,7 @@
 DROP TABLE IF EXISTS CUSTOMER_CARDS CASCADE;
 CREATE TABLE CUSTOMER_CARDS (
   card_id bigint auto_increment,
+  card_name VARCHAR(16),
   currentBalance DECIMAL(30, 2),
   pin SMALLINT,
   isLocked BOOLEAN,
@@ -12,7 +13,7 @@ CREATE TABLE CUSTOMER_CARDS (
 DROP TABLE IF EXISTS CARD_TRANSACTIONS CASCADE;
 CREATE TABLE CARD_TRANSACTIONS (
   cardTransaction_id bigint auto_increment,
-  cardTransactionCode VARCHAR(20),
+  cardTransactionCode VARCHAR(1),
   cardTransactionDate DATE,
   amount DECIMAL(30, 2),
   card_id bigint,

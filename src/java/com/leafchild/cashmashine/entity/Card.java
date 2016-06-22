@@ -7,7 +7,9 @@ package com.leafchild.cashmashine.entity;
  * Time: 12:51 AM
  */
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -28,15 +30,17 @@ public class Card implements Serializable {
     @Id
     @GeneratedValue( strategy = GenerationType.TABLE )
     private Long card_id;
+    @Column(name = "card_name")
+    private String name;
     private BigDecimal currentBalance;
     private short pin;
     private boolean isLocked;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "customer_id")
     private Customer customer;
 
-    @OneToMany
+    @OneToMany(fetch = FetchType.LAZY)
     @JoinColumn(name = "cardTransaction_id")
     private List<CardTransaction> transactions;
 
@@ -112,5 +116,15 @@ public class Card implements Serializable {
     public boolean checkPin(short pinCode) {
 
         return pin == pinCode;
+    }
+
+    public String getName() {
+
+        return name;
+    }
+
+    public void setName(String name) {
+
+        this.name = name;
     }
 }

@@ -10,6 +10,7 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -50,17 +51,32 @@ public class CardController {
         return new ResponseEntity<>( card, HttpStatus.OK );
     }
 
-    @RequestMapping( value = "/", method = RequestMethod.POST )
-    public ResponseEntity<Card> addCard( @RequestBody Card card ){
-        //Check required params
-        //Create card
-        cardService.saveCard( card );
-        //Check on errors if need
-        //Return results
-        return new ResponseEntity<>( card, HttpStatus.CREATED );
+    @RequestMapping( value = "/number/{number}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE )
+    public ResponseEntity<Boolean> findCardById( @PathVariable( value = "number" ) String number ){
+        //Check ID
+        //Check card
+        boolean found = cardService.checkCard( number ) != null;
+
+        if( !found ){
+            logger.error( "card with number " + number + " not found" );
+            return new ResponseEntity<>( HttpStatus.NOT_FOUND );
+        }
+
+        return new ResponseEntity<>( found, HttpStatus.OK );
     }
 
-    @RequestMapping( value = "/{id}", method = RequestMethod.PUT )
+    @RequestMapping( value = "/pincode", method = RequestMethod.POST )
+    public ResponseEntity<Card> checkPinCode(@RequestBody String creds){
+        //Check required params
+        //Create card
+        //TODO: Parse JSON
+        Card found = cardService.checkCard( creds );
+        //Check on errors if need
+        //Return results
+        return new ResponseEntity<>( found, HttpStatus.CREATED );
+    }
+
+    /*@RequestMapping( value = "/{id}", method = RequestMethod.PUT )
     public ResponseEntity<Card> updateCard( @PathVariable( "id" ) long id, @RequestBody Card card ){
 
         Card foundCard = cardService.findCardByID( id );
@@ -77,9 +93,9 @@ public class CardController {
         //Check on errors
         //Return results
         return new ResponseEntity<>( card, HttpStatus.OK );
-    }
+    }*/
 
-    @RequestMapping( value = "/{id}", method = RequestMethod.DELETE )
+    /*@RequestMapping( value = "/{id}", method = RequestMethod.DELETE )
     public ResponseEntity<Void> deleteCard( @PathVariable( "id" ) long id ){
 
         Card foundCard = cardService.findCardByID( id );
@@ -93,6 +109,6 @@ public class CardController {
         //Check on errors
         //Return results
         return new ResponseEntity<>( HttpStatus.OK );
-    }
+    }*/
 
 }
