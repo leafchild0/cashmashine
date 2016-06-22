@@ -19,10 +19,6 @@
 
        this.customerCard = {};
 
-       this.cardN = function() {
-            return $resource(baseUrl + 'api/cards/number/:number', null, {});
-       }
-
        this.pinCode = function() {
             return $resource(baseUrl + 'api/cards/pincode', null, {});
        }

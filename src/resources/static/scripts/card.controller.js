@@ -42,7 +42,7 @@
         vm.checkCard = function() {
             //If card is exists in the DB, go to the pin check page, otherwise show error
 
-            cardsService.cardN().get({number: vm.cardNumber.split('-').join('')})
+            cardsService.card().get({id: vm.cardNumber.split('-').join('')})
                       .$promise.then(function (response) {
                         //Remove from UI
                         cardsService.customerCard = response;
@@ -57,7 +57,7 @@
         vm.checkPin = function() {
             //If card is exists in the DB, go to the pin check page, otherwise show error
 
-            cardsService.pinCode().save({name: cardsService.customerCard, pinCode: vm.cardPin})
+            cardsService.pinCode().save({id: cardsService.customerCard, pinCode: vm.cardPin})
                       .$promise.then(function (response) {
                         //Remove from UI
                         $location.path('operations');

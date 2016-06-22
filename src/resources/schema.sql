@@ -1,8 +1,7 @@
 --CREATE SCHEMA
 DROP TABLE IF EXISTS CUSTOMER_CARDS CASCADE;
 CREATE TABLE CUSTOMER_CARDS (
-  card_id bigint auto_increment,
-  card_name VARCHAR(16),
+  card_id bigint,
   currentBalance DECIMAL(30, 2),
   pin SMALLINT,
   isLocked BOOLEAN,

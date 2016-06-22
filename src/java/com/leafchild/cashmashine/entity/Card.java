@@ -7,21 +7,18 @@ package com.leafchild.cashmashine.entity;
  * Time: 12:51 AM
  */
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.List;
-import java.util.Set;
 
 @Entity
 @Table( name = "CUSTOMER_CARDS" )
@@ -30,8 +27,6 @@ public class Card implements Serializable {
     @Id
     @GeneratedValue( strategy = GenerationType.TABLE )
     private Long card_id;
-    @Column(name = "card_name")
-    private String name;
     private BigDecimal currentBalance;
     private short pin;
     private boolean isLocked;
@@ -118,13 +113,4 @@ public class Card implements Serializable {
         return pin == pinCode;
     }
 
-    public String getName() {
-
-        return name;
-    }
-
-    public void setName(String name) {
-
-        this.name = name;
-    }
 }

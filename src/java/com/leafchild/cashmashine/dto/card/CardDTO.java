@@ -32,8 +32,4 @@ public class CardDTO implements CardService {
         return cardRepository.findAll();
     }
 
-    @Override
-    public Card checkCard(String cardNumber) {
-        return cardRepository.findByName(cardNumber);
-    }
 }

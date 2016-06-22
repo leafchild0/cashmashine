@@ -17,6 +17,4 @@ public interface CardService {
     
     List<Card> getAllCards();
 
-    Card checkCard(String cardNumber);
-
 }

@@ -2,6 +2,7 @@ package com.leafchild.cashmashine.services;
 
 import com.leafchild.cashmashine.dto.card.CardService;
 import com.leafchild.cashmashine.entity.Card;
+import org.json.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -51,29 +52,21 @@ public class CardController {
         return new ResponseEntity<>( card, HttpStatus.OK );
     }
 
-    @RequestMapping( value = "/number/{number}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE )
-    public ResponseEntity<Boolean> findCardById( @PathVariable( value = "number" ) String number ){
-        //Check ID
-        //Check card
-        boolean found = cardService.checkCard( number ) != null;
-
-        if( !found ){
-            logger.error( "card with number " + number + " not found" );
-            return new ResponseEntity<>( HttpStatus.NOT_FOUND );
-        }
-
-        return new ResponseEntity<>( found, HttpStatus.OK );
-    }
-
     @RequestMapping( value = "/pincode", method = RequestMethod.POST )
-    public ResponseEntity<Card> checkPinCode(@RequestBody String creds){
-        //Check required params
-        //Create card
-        //TODO: Parse JSON
-        Card found = cardService.checkCard( creds );
-        //Check on errors if need
+    public ResponseEntity<String> checkPinCode(@RequestBody String creds){
+        JSONObject obj = new JSONObject(creds);
+        Card found = cardService.findCardByID(Long.parseLong(obj.getString("id")));
+
+        if(found != null) {
+            //check pin code
+            if(found.getPin() == Short.parseShort(obj.getString("pinCode"))) {
+                //Sussess case
+                return new ResponseEntity<>("Pin is correct", HttpStatus.OK);
+            }
+            else return new ResponseEntity<>("Pin do not mutch", HttpStatus.BAD_REQUEST);
+        }
         //Return results
-        return new ResponseEntity<>( found, HttpStatus.CREATED );
+        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 
     /*@RequestMapping( value = "/{id}", method = RequestMethod.PUT )
