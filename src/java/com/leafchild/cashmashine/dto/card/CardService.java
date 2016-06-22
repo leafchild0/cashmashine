@@ -1,6 +1,7 @@
 package com.leafchild.cashmashine.dto.card;
 
 import com.leafchild.cashmashine.entity.Card;
+import com.leafchild.cashmashine.entity.CardTransaction;
 
 import java.util.List;
 
@@ -12,15 +13,10 @@ import java.util.List;
 
 public interface CardService {
     
-    Card findCardByID( long id);
-    
-    Card saveCard( Card card);
-
-    Card updateCard( Card card);
-    
-    Card deleteCard( Card card);
+    Card findCardByID(long id);
     
     List<Card> getAllCards();
-    
-    long count();
+
+    boolean checkCard(String cardNumber);
+
 }

@@ -22,18 +22,15 @@ public class CardTransaction implements Serializable {
     @GeneratedValue( strategy = GenerationType.TABLE )
     private Long cardTransaction_id;
     @NotNull
-    private String cardTransactionCode;
+    @Enumerated(EnumType.ORDINAL)
+    private CardTransactionCode cardTransactionCode;
     @Temporal( TemporalType.TIMESTAMP )
     private Date cardTransactionDate;
     private BigDecimal amount;
 
-    @ManyToOne
-    @JoinColumn(name = "card_id")
-    private Card card;
-
     public CardTransaction(){}
 
-    public CardTransaction( String cardTransactionCode, Date cardTransactionDate, BigDecimal amount ){
+    public CardTransaction( CardTransactionCode cardTransactionCode, Date cardTransactionDate, BigDecimal amount ){
         this.cardTransactionCode = cardTransactionCode;
         this.cardTransactionDate = cardTransactionDate;
         this.amount = amount;
@@ -54,22 +51,12 @@ public class CardTransaction implements Serializable {
                    + cardTransactionCode + ", cardTransactionDate = '" + cardTransactionDate + ", amount = '" + amount + '}';
     }
 
-    public Card getCard(){
-
-        return card;
-    }
-
-    public void setCard(Card card){
-
-        this.card = card;
-    }
-
-    public String getCardTransactionCode(){
+    public CardTransactionCode getCardTransactionCode(){
 
         return cardTransactionCode;
     }
 
-    public void setCardTransactionCode(String cardTransactionCode){
+    public void setCardTransactionCode(CardTransactionCode cardTransactionCode){
 
         this.cardTransactionCode = cardTransactionCode;
     }

@@ -36,6 +36,10 @@ public class Card implements Serializable {
     @JoinColumn(name = "customer_id")
     private Customer customer;
 
+    @OneToMany
+    @JoinColumn(name = "cardTransaction_id")
+    private List<CardTransaction> transactions;
+
     public Card(){}
 
     public Card( short pin, BigDecimal currentBalance ){
@@ -93,5 +97,20 @@ public class Card implements Serializable {
     public void setCustomer(Customer customer){
 
         this.customer = customer;
+    }
+
+    public List<CardTransaction> getTransactions() {
+
+        return transactions;
+    }
+
+    public void setTransactions(List<CardTransaction> transactions) {
+
+        this.transactions = transactions;
+    }
+
+    public boolean checkPin(short pinCode) {
+
+        return pin == pinCode;
     }
 }

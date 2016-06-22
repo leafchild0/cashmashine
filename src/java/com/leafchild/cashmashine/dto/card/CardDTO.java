@@ -1,6 +1,7 @@
 package com.leafchild.cashmashine.dto.card;
 
 import com.leafchild.cashmashine.entity.Card;
+import com.leafchild.cashmashine.entity.CardTransaction;
 import org.springframework.stereotype.Repository;
 
 import javax.annotation.Resource;
@@ -23,39 +24,22 @@ public class CardDTO implements CardService {
 
     @Override
     public Card findCardByID( long id ){
-
         return cardRepository.findOne( id );
     }
 
     @Override
-    public Card saveCard( Card card ){
-
-        return cardRepository.save( card );
-    }
-
-    @Override
-    public Card updateCard( Card card ){
-
-        cardRepository.save( card );
-        return card;
-    }
-
-    @Override
-    public Card deleteCard( Card card ){
-
-        cardRepository.delete( card );
-        return card;
-    }
-
-    @Override
     public List<Card> getAllCards(){
-
         return cardRepository.findAll();
     }
 
     @Override
-    public long count(){
+    public boolean checkCard(String cardNumber) {
+        //TODO: will it work?
+        return cardRepository.findByCardName(cardNumber) != null;
+    }
 
-        return cardRepository.count();
+    public void setCardRepository(CardRepository cardRepository) {
+
+        this.cardRepository = cardRepository;
     }
 }
