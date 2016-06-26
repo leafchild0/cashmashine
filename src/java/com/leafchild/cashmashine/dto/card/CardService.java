@@ -12,9 +12,11 @@ import java.util.List;
  */
 
 public interface CardService {
-    
-    Card findCardByID(long id);
-    
-    List<Card> getAllCards();
+
+  Card findCardByID( long id );
+
+  List<Card> getAllCards();
+
+  void save( Card card );
 
 }

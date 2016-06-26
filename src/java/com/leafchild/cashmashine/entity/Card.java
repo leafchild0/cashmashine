@@ -7,6 +7,8 @@ package com.leafchild.cashmashine.entity;
  * Time: 12:51 AM
  */
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -24,93 +26,105 @@ import java.util.List;
 @Table( name = "CUSTOMER_CARDS" )
 public class Card implements Serializable {
 
-    @Id
-    @GeneratedValue( strategy = GenerationType.TABLE )
-    private Long card_id;
-    private BigDecimal currentBalance;
-    private short pin;
-    private boolean isLocked;
+  @Id
+  @GeneratedValue( strategy = GenerationType.TABLE )
+  private Long card_id;
+  private BigDecimal currentBalance;
+  private short pin;
+  private boolean isLocked;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "customer_id")
-    private Customer customer;
+  @JsonIgnore
+  @ManyToOne( fetch = FetchType.LAZY )
+  @JoinColumn( name = "customer_id" )
+  private Customer customer;
 
-    @OneToMany(fetch = FetchType.LAZY)
-    @JoinColumn(name = "cardTransaction_id")
-    private List<CardTransaction> transactions;
+  @JsonIgnore
+  @OneToMany( fetch = FetchType.LAZY, mappedBy = "cardTransaction_id" )
+  private List<CardTransaction> transactions;
 
-    public Card(){}
+  public Card(){}
 
-    public Card( short pin, BigDecimal currentBalance ){
-        this.pin = pin;
-        this.currentBalance = currentBalance;
-    }
+  public Card( short pin, BigDecimal currentBalance ){
 
-    public BigDecimal getCurrentBalance(){
-        return currentBalance;
-    }
+    this.pin = pin;
+    this.currentBalance = currentBalance;
+  }
 
-    public void setCurrentBalance( BigDecimal current_balance ){
-        this.currentBalance = current_balance;
-    }
+  public BigDecimal getCurrentBalance(){
 
-    public short getPin(){
-        return pin;
-    }
+    return currentBalance;
+  }
 
-    public void setPin( short pin ){
-        this.pin = pin;
-    }
+  public void setCurrentBalance( BigDecimal current_balance ){
 
-    public boolean isLocked(){
-        return isLocked;
-    }
+    this.currentBalance = current_balance;
+  }
 
-    public void setIsLocked( boolean isLocked ){
-        this.isLocked = isLocked;
-    }
+  public short getPin(){
 
-    public Long getCard_id(){
-        return card_id;
-    }
+    return pin;
+  }
 
-    public void setCard_id( Long card_id ){
-        this.card_id = card_id;
-    }
+  public void setPin( short pin ){
 
-    public void setLocked( boolean locked ){
-        isLocked = locked;
-    }
+    this.pin = pin;
+  }
 
-    @Override
-    public String toString(){
-        return "Card" + "{id=" + card_id + ", pin='" + pin + ", isLocked='" + isLocked + '}';
-    }
+  public boolean isLocked(){
+
+    return isLocked;
+  }
+
+  public void setIsLocked( boolean isLocked ){
+
+    this.isLocked = isLocked;
+  }
+
+  public Long getCard_id(){
+
+    return card_id;
+  }
+
+  public void setCard_id( Long card_id ){
+
+    this.card_id = card_id;
+  }
+
+  public void setLocked( boolean locked ){
+
+    isLocked = locked;
+  }
+
+  @Override
+  public String toString(){
+
+    return "Card" + "{id=" + card_id + ", pin='" + pin + ", isLocked='" + isLocked + '}';
+  }
 
 
-    public Customer getCustomer(){
+  public Customer getCustomer(){
 
-        return customer;
-    }
+    return customer;
+  }
 
-    public void setCustomer(Customer customer){
+  public void setCustomer( Customer customer ){
 
-        this.customer = customer;
-    }
+    this.customer = customer;
+  }
 
-    public List<CardTransaction> getTransactions() {
+  public List<CardTransaction> getTransactions(){
 
-        return transactions;
-    }
+    return transactions;
+  }
 
-    public void setTransactions(List<CardTransaction> transactions) {
+  public void setTransactions( List<CardTransaction> transactions ){
 
-        this.transactions = transactions;
-    }
+    this.transactions = transactions;
+  }
 
-    public boolean checkPin(short pinCode) {
+  public boolean checkPin( short pinCode ){
 
-        return pin == pinCode;
-    }
+    return pin == pinCode;
+  }
 
 }

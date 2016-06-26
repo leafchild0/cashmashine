@@ -1,18 +1,15 @@
 <div class="container">
 
+    <h2 class="page-header center text-center">Cash Machine Balance</h2>
 
-    <!--<div class="form-group">
-        <div class="col-sm-6 col-lg-6 pull-left">
-            <input type="text" class="form-control required" name="last_name" value=""
-                   placeholder="Last name">
-        </div>
-    </div>-->
-    <!--To be done on this page:
-            small div which should contains info about:
-             - card number
-             - current date
-             - money on account
-    -->
+    <toaster-container
+        toaster-options="{'time-out': 3000, 'close-button':true, 'animation-class': 'toast-top-right'}"></toaster-container>
+
+    <div class="row">
+        <p class="lead">Card Info: {{balance.userCard.card_id}}</p>
+        <p>Current date: {{balance.currentDate | date}}</p>
+        <p>Amount: {{balance.userCard.currentBalance}}</p>
+    </div>
 
     <div class="row">
         <div class="col-lg-12">

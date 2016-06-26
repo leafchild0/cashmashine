@@ -19,17 +19,25 @@ import java.util.List;
 @Transactional
 public class CardDTO implements CardService {
 
-    @Resource
-    private CardRepository cardRepository;
+  @Resource
+  private CardRepository cardRepository;
 
-    @Override
-    public Card findCardByID( long id ){
-        return cardRepository.findOne( id );
-    }
+  @Override
+  public Card findCardByID( long id ){
 
-    @Override
-    public List<Card> getAllCards(){
-        return cardRepository.findAll();
-    }
+    return cardRepository.findOne(id);
+  }
+
+  @Override
+  public List<Card> getAllCards(){
+
+    return cardRepository.findAll();
+  }
+
+  @Override
+  public void save( Card card ){
+    cardRepository.save(card);
+
+  }
 
 }

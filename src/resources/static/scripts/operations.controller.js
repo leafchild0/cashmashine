@@ -5,15 +5,32 @@
  */
 
 
- ( function () {
-    'use strict';
+(function(){
+  'use strict';
+  
+  angular.module('cashmachine').controller('OperationsController', OperationsController);
+  
+  OperationsController.$inject = [ '$scope', 'toaster', 'cardsService' ];
+  
+  function OperationsController( $scope, toaster, cardsService ){
+    var vm = this;
+    vm.userCard = cardsService.customerCard;
+    vm.currentDate = new Date();
 
-     angular.module( 'cashmachine' )
-             .controller( 'OperationsController', OperationsController );
+    vm.getCard = function(){
 
-     function OperationsController() {
-         var vm = this;
+      cardsService.cardInfo().get({ id: cardsService.customerCardId }).$promise.then(function( response ){
+            cardsService.customerCard = response;
+            vm.userCard = response;
+            //$scope.$digest;
+          },
+          function( response ){
+            toaster.error("Error " + response.status, "Cause: " + response.data);
+          });
+    };
 
-     }
+    vm.getCard();
 
- } )();
+  }
+  
+})();

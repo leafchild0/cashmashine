@@ -11,7 +11,6 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -24,50 +23,73 @@ import java.util.List;
 @RequestMapping( "/api/cards" )
 public class CardController {
 
-    @Autowired
-    private CardService cardService;
+  @Autowired
+  private CardService cardService;
 
-    private static final Logger logger =
-        LoggerFactory.getLogger( CardController.class );
+  private static final Logger logger =
+      LoggerFactory.getLogger(CardController.class);
 
-    @RequestMapping( value = "/", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE )
-    public ResponseEntity<List<Card>> findCards(){
-        List<Card> cards = cardService.getAllCards();
-        if( cards.isEmpty() ) return new ResponseEntity<>( HttpStatus.NO_CONTENT );
+  @RequestMapping( value = "/", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE )
+  public ResponseEntity<List<Card>> findCards(){
 
-        return new ResponseEntity<>( cards, HttpStatus.OK );
+    List<Card> cards = cardService.getAllCards();
+    if( cards.isEmpty() ) return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+
+    return new ResponseEntity<>(cards, HttpStatus.OK);
+  }
+
+  @RequestMapping( value = "/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE )
+  public ResponseEntity<Boolean> findCardByID( @PathVariable( value = "id" ) Long id ){
+    //Check ID
+    //Check card
+    Card card = cardService.findCardByID(id);
+
+    if( card == null ){
+      logger.error("card with id " + id + " not found");
+      return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 
-    @RequestMapping( value = "/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE )
-    public ResponseEntity<Card> findCardByID( @PathVariable( value = "id" ) Long id ){
-        //Check ID
-        //Check card
-        Card card = cardService.findCardByID( id );
+    return new ResponseEntity<>(!card.isLocked(), HttpStatus.OK);
+  }
 
-        if( card == null ){
-            logger.error( "card with id " + id + " not found" );
-            return new ResponseEntity<>( HttpStatus.NOT_FOUND );
-        }
+  @RequestMapping( value = "/{id}/info", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE )
+  public ResponseEntity<Card> getCardByID( @PathVariable( value = "id" ) Long id ){
+    //Check ID
+    //Check card
+    Card card = cardService.findCardByID(id);
 
-        return new ResponseEntity<>( card, HttpStatus.OK );
+    if( card == null ){
+      logger.error("card with id " + id + " not found");
+      return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 
-    @RequestMapping( value = "/pincode", method = RequestMethod.POST )
-    public ResponseEntity<String> checkPinCode(@RequestBody String creds){
-        JSONObject obj = new JSONObject(creds);
-        Card found = cardService.findCardByID(Long.parseLong(obj.getString("id")));
+    return new ResponseEntity<>(card, HttpStatus.OK);
+  }
 
-        if(found != null) {
-            //check pin code
-            if(found.getPin() == Short.parseShort(obj.getString("pinCode"))) {
-                //Sussess case
-                return new ResponseEntity<>("Pin is correct", HttpStatus.OK);
-            }
-            else return new ResponseEntity<>("Pin do not mutch", HttpStatus.BAD_REQUEST);
-        }
-        //Return results
-        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+  @RequestMapping( value = "/pincode", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE )
+  public ResponseEntity<String> checkPinCode( @RequestBody String creds ){
+
+    JSONObject obj   = new JSONObject(creds);
+    Card       found = cardService.findCardByID(obj.getLong("id"));
+
+    if( found != null ){
+      //check whether its locked
+      if(obj.getBoolean("isLocked")) {
+        //Save it, send message to block in UI
+        found.setLocked(true);
+        cardService.save(found);
+        return new ResponseEntity<>(JSONObject.quote("Your card has been locked"), HttpStatus.LOCKED);
+      }
+
+      //check pin code
+      if( found.getPin() == obj.getInt("pinCode") ){
+        //Sussess case
+        return new ResponseEntity<>(JSONObject.quote("Pin is correct"), HttpStatus.OK);
+      } else { return new ResponseEntity<>(JSONObject.quote("Pin do not match"), HttpStatus.BAD_REQUEST); }
     }
+    //Return results
+    return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+  }
 
     /*@RequestMapping( value = "/{id}", method = RequestMethod.PUT )
     public ResponseEntity<Card> updateCard( @PathVariable( "id" ) long id, @RequestBody Card card ){
