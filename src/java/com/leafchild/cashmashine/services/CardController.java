@@ -21,7 +21,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping( "/api/cards" )
-public class CardController {
+class CardController {
 
   @Autowired
   private CardService cardService;
@@ -90,40 +90,5 @@ public class CardController {
     //Return results
     return new ResponseEntity<>(HttpStatus.NOT_FOUND);
   }
-
-    /*@RequestMapping( value = "/{id}", method = RequestMethod.PUT )
-    public ResponseEntity<Card> updateCard( @PathVariable( "id" ) long id, @RequestBody Card card ){
-
-        Card foundCard = cardService.findCardByID( id );
-
-        if( foundCard == null ){
-            logger.error( "Requested card " + id + " not found" );
-            return new ResponseEntity<>( card, HttpStatus.NOT_FOUND );
-        }
-        foundCard.setCurrentBalance( card.getCurrentBalance() );
-        foundCard.setLocked( card.isLocked() );
-
-        //Update card
-        card = cardService.updateCard( card );
-        //Check on errors
-        //Return results
-        return new ResponseEntity<>( card, HttpStatus.OK );
-    }*/
-
-    /*@RequestMapping( value = "/{id}", method = RequestMethod.DELETE )
-    public ResponseEntity<Void> deleteCard( @PathVariable( "id" ) long id ){
-
-        Card foundCard = cardService.findCardByID( id );
-
-        if( foundCard == null ){
-            logger.error( "Requested card " + id + " not found" );
-            return new ResponseEntity<>( HttpStatus.NOT_FOUND );
-        }
-        //Delete card
-        cardService.deleteCard( foundCard );
-        //Check on errors
-        //Return results
-        return new ResponseEntity<>( HttpStatus.OK );
-    }*/
 
 }

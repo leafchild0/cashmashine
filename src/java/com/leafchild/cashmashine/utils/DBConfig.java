@@ -75,6 +75,9 @@ public class DBConfig {
         additionalProperties.put(
             "hibernate.hbm2ddl.auto",
             env.getProperty("hibernate.hbm2ddl.auto"));
+        additionalProperties.put(
+            "spring.jackson.serialization.fail-on-empty-beans",
+            env.getProperty("spring.jackson.serialization.fail-on-empty-beans"));
 
         sessionBuilder.setHibernateProperties(additionalProperties);
         return sessionBuilder;
