@@ -1,0 +1,32 @@
+<div class="container ios">
+    <h2 class="page-header center text-center">Withdraw money</h2>
+    <toaster-container
+        toaster-options="{'time-out': 3000, 'close-button':true, 'animation-class': 'toast-top-right'}"></toaster-container>
+    <form class="form-horizontal" name="withdraw.amountForm" role="form" method="POST"
+          ng-submit="withdraw.makeWithdraw()"
+          accept-charset="UTF-8">
+        <div class="row">
+            <div class="form-group">
+                <div class="col-lg-6 col-lg-offset-3 center text-center">
+                    <input type="text" class="keypad-display" name="amount" ng-model="withdraw.amount" cc-number
+                           ng-required="true" disabled />
+                    <p ng-show="withdraw.amountForm.amount.$invalid &&
+                    !withdraw.amountForm.amount.$pristine">That's not a valid amount</p>
+                </div>
+            </div>
+            <div class="col-lg-6 col-lg-offset-3">
+                <ng-keypad on-key-pressed='withdraw.onKeyPressed'>
+                    <ng-key ng-repeat='key in withdraw.keys' ng-key-data='key'>{{key}}</ng-key>
+                    <ng-key></ng-key>
+                    <ng-key ng-key-data='0'>0</ng-key>
+                    <ng-key ng-key-data='"<"'>clean</ng-key>
+                </ng-keypad>
+            </div>
+        </div>
+        <hr>
+        <div class="center text-center">
+            <button type="submit" class="btn btn-lg btn-primary">Withdraw</button>
+            <a ng-href="logout" class="btn btn-lg btn-warning">Exit</a>
+        </div>
+    </form>
+</div>

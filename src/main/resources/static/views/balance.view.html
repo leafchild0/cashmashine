@@ -1,0 +1,19 @@
+<div class="container" ng-init="balance.getCard()">
+
+    <h2 class="page-header center text-center">Balance</h2>
+    <toaster-container toaster-options="{'time-out': 3000, 'close-button':true, 'animation-class': 'toast-top-right'}"></toaster-container>
+    <div class="row">
+        <div class="col-lg-6 col-lg-offset-3">
+            <p class="lead">Card Info: {{balance.userCard.card_id}}</p>
+            <p>Current date: {{balance.currentDate | date}}</p>
+            <p>Amount: {{balance.userCard.currentBalance}}</p>
+        </div>
+    </div>
+    <hr>
+    <div class="row">
+        <div class="center text-center">
+            <a ng-href="operations" class="btn btn-lg btn-default">Back</a>
+            <a ng-href="logout" class="btn btn-lg btn-warning">Exit</a>
+        </div>
+    </div>
+</div>

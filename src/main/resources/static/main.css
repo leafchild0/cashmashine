@@ -1,0 +1,26 @@
+::-webkit-input-placeholder {
+    color: #ccc;
+}
+:-moz-placeholder {
+    color: #ccc;
+}
+::-moz-placeholder {
+    color: #ccc;
+}
+:-ms-input-placeholder {
+    color: #ccc;
+}
+.errors-view {
+    margin: 50px;
+}
+.errors-view p {
+    color: orangered;
+}
+
+div p {
+    text-align:center;
+}
+
+html, body {
+    margin: 20px;
+}

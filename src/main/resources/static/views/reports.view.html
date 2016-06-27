@@ -1,0 +1,18 @@
+<div class="container">
+
+    <h2 class="page-header center text-center">Report</h2>
+    <toaster-container toaster-options="{'time-out': 3000, 'close-button':true, 'animation-class': 'toast-top-right'}"></toaster-container>
+    <div class="row">
+        <p class="lead">Card Info: {{reports.userCard.card_id}}</p>
+        <p>Current date: {{reports.currentDate | date}}</p>
+        <p>Last operation withdraw: {{reports.userCard.lastWithdraw}}</p>
+        <p>Amount left: {{reports.userCard.currentBalance}}</p>
+    </div>
+
+    <div class="row">
+        <div class="center text-center">
+            <a ng-href="operations" class="btn btn-lg btn-default">Back</a>
+            <a ng-href="logout" class="btn btn-lg btn-warning">Exit</a>
+        </div>
+    </div>
+</div>
