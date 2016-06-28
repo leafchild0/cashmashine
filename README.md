@@ -12,7 +12,7 @@ Represents an interface similar to any ATM. Has really simple and sometimes sill
 * Bootstrap 3.3.6
 
 ## How to run:
-This is usual Spring boot app supported by Maven. So for running just build the artefact or run it using IDE and main class.
+This is usual Spring boot app supported by Maven. So for running just build the artifact or run it using IDE and main class.
 
 ## How to contribute:
 Just fork this project into separate branch, add fancy stuff and return back with pull request.
