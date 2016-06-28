@@ -67,6 +67,7 @@ class MainController {
     transaction.setCard(card);
     card.getTransactions().add(transaction);
     transactionService.saveTransaction(transaction);
+    cardService.save(card);
 
     logger.debug("Balance transactions was saved " + transaction);
 
